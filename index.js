@@ -25,11 +25,19 @@ app.use(bodyParser.json());
 // This allows all origins - be cautious with this in production environments
 
 // Example allowing specific origin
-
-
-// Enable CORS for all origins
-app.use(cors());
-
+app.use(
+  cors({
+    // Allow requests from multiple origins, including your GitHub Pages site
+    origin: [
+      "http://localhost:3000", // Your development origin
+      "https://reddylaxman.github.io/untitled/", // Your GitHub Pages site
+    ],
+    optionsSuccessStatus: 200,
+    methods: ["GET", "POST", "PUT", "DELETE"], // Methods you want to allow
+    allowedHeaders: ["Content-Type", "Authorization"], // Headers to allow
+    credentials: true, // If you want to allow cookies/credentials
+  })
+);
 
 //Database connection Establishment
 
@@ -47,14 +55,14 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   if (
-    (!username ||
-      !password ||
-      !fullname ||
-      !email ||
-      !phone ||
-      !country ||
-      !address||
-    !gender)
+    !username ||
+    !password ||
+    !fullname ||
+    !email ||
+    !phone ||
+    !country ||
+    !address ||
+    !gender
   ) {
     return res
       .status(422)
@@ -262,7 +270,7 @@ app.put("/updateStudent/:id", async (req, res) => {
   try {
     // Find the doctor by ID and update the fields
     const updatedStudent = await students.findByIdAndUpdate(
-      req.params.id,
+      req.params.sid,
       {
         htno,
         fullname,

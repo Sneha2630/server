@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-
 // Define Schemas
 
 const userSchema = mongoose.Schema({
@@ -11,7 +10,6 @@ const userSchema = mongoose.Schema({
   country: String,
   address: String,
 });
-
 const employeeSchema = mongoose.Schema({
   empid: { type: String, required: true, unique: true }, // Define empid field
   empname: String,
@@ -20,20 +18,14 @@ const employeeSchema = mongoose.Schema({
   emprole: String,
   empactive: Boolean,
 });
-
 // Define Student Schema
 const studentSchema = new mongoose.Schema({
   htno: String,
-
   fullname: String,
   password: String,
-
   group: String,
-
   email: String,
-
   mobile: String,
-
   gender: {
     type: String,
     enum: ["male", "female"], // To restrict values to 'male' or 'female'
