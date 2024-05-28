@@ -26,16 +26,7 @@ app.use(bodyParser.json());
 // This allows all origins - be cautious with this in production environments
 
 // Example allowing specific origin
-app.use(
-  cors({
-    // Allow requests from multiple origins, including your GitHub Pages site
-    origin:"*",
-    optionsSuccessStatus: 200,
-    methods: ["GET", "POST", "PUT", "DELETE"], // Methods you want to allow
-    allowedHeaders: ["Content-Type", "Authorization"], // Headers to allow
-    credentials: true, // If you want to allow cookies/credentials
-  })
-);
+app.use(cors());
 
 //Database connection Establishment
 
