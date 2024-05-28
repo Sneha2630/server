@@ -1,3 +1,4 @@
+
 var express = require("express");
 const cors = require("cors");
 var bodyParser = require("body-parser");
@@ -28,10 +29,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     // Allow requests from multiple origins, including your GitHub Pages site
-    origin: [
-      "http://localhost:3000", // Your development origin
-      "https://reddylaxman.github.io/untitled/", // Your GitHub Pages site
-    ],
+    origin:"*",
     optionsSuccessStatus: 200,
     methods: ["GET", "POST", "PUT", "DELETE"], // Methods you want to allow
     allowedHeaders: ["Content-Type", "Authorization"], // Headers to allow
@@ -55,14 +53,14 @@ app.post("/register", async (req, res) => {
   } = req.body;
 
   if (
-    !username ||
-    !password ||
-    !fullname ||
-    !email ||
-    !phone ||
-    !country ||
-    !address ||
-    !gender
+    (!username ||
+      !password ||
+      !fullname ||
+      !email ||
+      !phone ||
+      !country ||
+      !address||
+    !gender)
   ) {
     return res
       .status(422)
@@ -270,7 +268,7 @@ app.put("/updateStudent/:id", async (req, res) => {
   try {
     // Find the doctor by ID and update the fields
     const updatedStudent = await students.findByIdAndUpdate(
-      req.params.sid,
+      req.params.id,
       {
         htno,
         fullname,
